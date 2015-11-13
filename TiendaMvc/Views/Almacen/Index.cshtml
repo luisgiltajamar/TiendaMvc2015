@@ -1,0 +1,37 @@
+﻿@model IEnumerable<TiendaMvc.Models.Almacen>
+
+@{
+    ViewBag.Title = "title";
+
+}
+
+@foreach (var item in Model)
+{
+    <div class="col-md-3">
+        <h3>@Html.DisplayFor(o => item.nombre) </h3>
+        <p>
+            @Html.DisplayFor(o => item.ciudad)
+            @Html.DisplayFor(o => item.cp)
+        </p>
+        <p>
+            @Html.ActionLink("Modificar", "Modificar",
+                     new {id = item.idAlmacen})
+
+            <a href="#" id="lnkDel" data-id="@item.idAlmacen">
+                Borrar
+            </a>
+       
+        </p>
+    </div>
+
+
+}
+<script>
+    $("#lnkDel").click(function() {
+        var r = confirm("Estas seguro?");
+        if (r) {
+            var id = $(this).attr("data-id");
+            location.href = "/Almacen/Borrar/"+id;
+        }
+    });
+</script>

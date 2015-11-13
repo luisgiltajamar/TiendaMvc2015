@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
 namespace TiendaMvc.Models
 {
     using System;
@@ -21,8 +24,16 @@ namespace TiendaMvc.Models
         }
     
         public int idAlmacen { get; set; }
+        [DisplayName("Nombre")]
+        [Required]
         public string nombre { get; set; }
+        [DisplayName("Ciudad")]
+        [Required]
         public string ciudad { get; set; }
+        [DisplayName("Código postal")]
+        [Required]
+        [RegularExpression("^[0-9]{5}$",
+            ErrorMessage = "Codigo postal incorrecto")]
         public string cp { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
