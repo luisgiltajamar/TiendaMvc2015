@@ -12,6 +12,15 @@
         @Html.DisplayNameFor(o=>o.nombre)
         @Html.DisplayFor(o=>item.nombre)
         <br/>
+        <h3>Almacenes</h3>
+        @*<ul>*@
+            @foreach (var alm in item.ProductoAlmacen)
+            {
+                @Html.Partial("_fichaAlmacen", alm.Almacen)
+               
+
+            }
+        @*</ul>*@
         @Html.ActionLink("Ver","Detalle",new {id=item.idProducto})
     </div> 
 
