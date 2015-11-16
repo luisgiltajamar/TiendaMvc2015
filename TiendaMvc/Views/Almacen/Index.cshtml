@@ -1,11 +1,18 @@
 ﻿@using System.Collections.Specialized
+@using TiendaMvc.Models
 @model IEnumerable<TiendaMvc.Models.Almacen>
 
 @{
     ViewBag.Title = "title";
-
+    var etiq = ViewBag.etiquetas as List<Etiqueta>;
 }
-
+<h1>
+    @ViewData["Titulo"]
+</h1>
+@foreach (var et in etiq)
+{
+    <h3>@et.nombre</h3>
+}
 @foreach (var item in Model)
 {
     @Html.Partial("_fichaAlmacen",item)

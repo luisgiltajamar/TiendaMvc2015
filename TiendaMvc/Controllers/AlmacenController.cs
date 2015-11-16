@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TiendaMvc.Filtros;
 using TiendaMvc.Models;
 
 namespace TiendaMvc.Controllers
@@ -13,13 +14,20 @@ namespace TiendaMvc.Controllers
         private tiendaluisEntities db=
             new tiendaluisEntities();
 
+      
         // GET: Almacen
         public ActionResult Index()
         {
+            var info = db.Etiqueta;
+
+            ViewBag.etiquetas = info.ToList();
+            ViewData["Titulo"] = "Listado de almacenes";
+
             var data = db.Almacen;
             return View(data);
         }
 
+        [FiltroId]
         public ActionResult Modificar(int id)
         {
             var data = db.Almacen.Find(id);
@@ -40,7 +48,7 @@ namespace TiendaMvc.Controllers
             return View(model);
 
         }
-
+        [FiltroId]
         public ActionResult Borrar(int id)
         {
             var data = db.Almacen.Find(id);
