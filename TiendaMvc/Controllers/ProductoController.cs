@@ -7,7 +7,7 @@ using TiendaMvc.Models;
 
 namespace TiendaMvc.Controllers
 {
-    public class ProductoController : Controller
+    public class ProductoController : BaseController
     {
         tiendaluisEntities db=new tiendaluisEntities();
 
