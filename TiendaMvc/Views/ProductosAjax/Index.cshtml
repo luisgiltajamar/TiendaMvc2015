@@ -1,0 +1,73 @@
+﻿@model IEnumerable<TiendaMvc.Models.Producto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Productos</h2>
+<input type="text" id="txtBusqueda" placeholder="Texto a buscar..."/>
+<input type="button" id="btnBus" value="Buscar"/>
+
+<div id="listado">
+    @Html.Partial("_listadoProducto", Model)
+</div>
+<div>
+    <input type="text" id="txtNom" placeholder="Nombre"/>
+    <br/>
+    <input type="text" id="txtFab" placeholder="Fabricante" />
+    <br />
+    <input type="text" id="txtDesc" placeholder="Descripcion"/>
+        <br />
+    <input type="text" id="txtCost" placeholder="Coste" />
+        <br/>
+    <input type="text" id="txtVent" placeholder="Venta" />
+        <br/>
+    <input type="button" value="Guardar" id="btnGuardar" />
+
+</div>
+
+@section MiJavaScript
+{
+    <script>
+        function alta() {
+            var data = {
+                nombre: $("#txtNom").val(),
+                descripcion: $("#txtDesc").val(),
+                precioCoste: $("#txtCost").val(),
+                precioVenta: $("#txtVent").val(),
+                fabricante: $("#txtFab").val(),
+                idCategoria: 1
+            };
+            var url = "@Url.Action("Alta")";
+            $.ajax({
+                url: url,
+                data: JSON.stringify(data),
+                type: "POST",
+                headers: { "Content-Type": "application/json" },
+                dataType: "json",
+                success:function(res) {
+                    if (res.idProducto > 0) {
+                        console.log(res);
+                        alert("Guardado");
+                        //volver a cargar
+                    } else {
+                        alert("Error al guardar");
+                    }
+                }
+            });
+
+        }
+
+        $("#btnGuardar").click(alta);
+        $("#btnBus").click(function() {
+
+            var url = "@Url.Action("Buscar")";
+            var txt = $("#txtBusqueda").val();
+            url += "?nombre=" + txt;
+
+            $("#listado").load(url);
+
+        });
+    </script>
+
+}

@@ -7,9 +7,11 @@ using TiendaMvc.Models;
 
 namespace TiendaMvc.Controllers
 {
-    public class ProductoController : BaseController
+    public class ProductoController : Controller
     {
         tiendaluisEntities db=new tiendaluisEntities();
+
+        
 
         public ActionResult Index()
         {
@@ -18,9 +20,13 @@ namespace TiendaMvc.Controllers
             return View(data);
         }
 
-        public ActionResult Detalle(int id)
+        public ActionResult Detalle(String nombre)
         {
-            var data = db.Producto.Find(id);
+            var nom = nombre.Replace("_", " ");
+
+            var data = db.Producto.FirstOrDefault(o=>o.nombre==nom);
+            if (data == null)
+                return RedirectToAction("Index");
             return View(data);
         }
 

@@ -21,7 +21,8 @@
 
             }
         @*</ul>*@
-        @Html.ActionLink("Ver","Detalle",new {id=item.idProducto})
+        @Html.ActionLink("Ver","Detalle",
+       new {nombre=item.nombre.Replace(" ","_")})
     </div> 
 
 }
