@@ -47,9 +47,10 @@
                 dataType: "json",
                 success:function(res) {
                     if (res.idProducto > 0) {
-                        console.log(res);
+                        $("#txtBusqueda").val("");
+                        listado();
                         alert("Guardado");
-                        //volver a cargar
+
                     } else {
                         alert("Error al guardar");
                     }
@@ -57,9 +58,7 @@
             });
 
         }
-
-        $("#btnGuardar").click(alta);
-        $("#btnBus").click(function() {
+        function listado() {
 
             var url = "@Url.Action("Buscar")";
             var txt = $("#txtBusqueda").val();
@@ -67,7 +66,9 @@
 
             $("#listado").load(url);
 
-        });
+        }
+        $("#btnGuardar").click(alta);
+        $("#btnBus").click(listado);
     </script>
 
 }
